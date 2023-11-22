@@ -16,7 +16,6 @@ connectDb().catch((err) => console.log(err));
 
 // AuthorisationCORS
 app.use(
-  setHeader("Access-Allow-Control-Origin", "https://gamifyurlife.netlify.app"),
   cors({
     origin: "https://gamifyurlife.netlify.app",
     credentials: true,
@@ -28,6 +27,15 @@ app.use(
 app.use(express.json());
 app.use(userRoutes);
 app.use(budgetRoutes);
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://gamifyurlife.netlify.app"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 app.listen(port, () => {
   console.log("Le serveur est lancé sur le port " + port);
