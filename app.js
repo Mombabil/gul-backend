@@ -27,7 +27,6 @@ app.use(
 app.use(express.json());
 app.use(userRoutes);
 app.use(budgetRoutes);
-app.use((req, res) => res.json({ message: "l'api est en ligne" }));
 
 app.listen(port, () => {
   console.log("Le serveur est lancé sur le port " + port);
