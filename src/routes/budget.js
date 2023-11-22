@@ -4,7 +4,7 @@ const router = new express.Router();
 
 // CREATE
 // nouveau budget
-router.post("/api/budgets", async (req, res, next) => {
+router.post("/budgets", async (req, res, next) => {
   const budget = new Budget(req.body);
   await budget.save();
   res.status(200).json(budget);
@@ -12,7 +12,7 @@ router.post("/api/budgets", async (req, res, next) => {
 
 // READ
 // recuperer tout les budgets
-router.get("/api/budgets", async (req, res, next) => {
+router.get("/budgets", async (req, res, next) => {
   try {
     const budgets = await Budget.find({});
     res.send(budgets);
@@ -23,7 +23,7 @@ router.get("/api/budgets", async (req, res, next) => {
 
 // UPDATE
 // modifier un budget
-router.patch("/api/budgets/:id", async (req, res, next) => {
+router.patch("/budgets/:id", async (req, res, next) => {
   const updateBudget = Object.keys(req.body);
 
   try {
@@ -38,7 +38,7 @@ router.patch("/api/budgets/:id", async (req, res, next) => {
 
 // DELETE
 // supprimer un budget
-router.patch("/api/budgets/:id", async (req, res, next) => {
+router.patch("/budgets/:id", async (req, res, next) => {
   const budgetId = req.params.id;
 
   try {

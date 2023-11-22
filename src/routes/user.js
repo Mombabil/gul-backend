@@ -5,7 +5,7 @@ const router = new express.Router();
 
 // CREATE
 // creation de compte
-router.post("/api/users", async (req, res, next) => {
+router.post("/users", async (req, res, next) => {
   const user = new User(req.body);
 
   try {
@@ -16,7 +16,7 @@ router.post("/api/users", async (req, res, next) => {
   }
 });
 // connexion
-router.post("/api/users/login", async (req, res, next) => {
+router.post("/users/login", async (req, res, next) => {
   try {
     const user = await User.findUser(req.body.email, req.body.password);
     const authToken = await user.generateAuthTokenAndSaveUser();
@@ -26,7 +26,7 @@ router.post("/api/users/login", async (req, res, next) => {
   }
 });
 // déconnexion
-router.post("/api/users/logout", authentification, async (req, res, next) => {
+router.post("/users/logout", authentification, async (req, res, next) => {
   try {
     // on recupere la liste de tt les tokens
     // on filtre le token en cours d'utilisation
@@ -41,19 +41,15 @@ router.post("/api/users/logout", authentification, async (req, res, next) => {
   }
 });
 // supprimer ts les tokens de l'utilisateur
-router.post(
-  "/api/users/logout/all",
-  authentification,
-  async (req, res, next) => {
-    try {
-      req.user.authTokens = [];
-      await req.user.save();
-      res.send();
-    } catch (e) {
-      res.status(500).send();
-    }
+router.post("/users/logout/all", authentification, async (req, res, next) => {
+  try {
+    req.user.authTokens = [];
+    await req.user.save();
+    res.send();
+  } catch (e) {
+    res.status(500).send();
   }
-);
+});
 // READ ALL
 // router.get("/users", async (req, res, next) => {
 //   try {
@@ -65,7 +61,7 @@ router.post(
 // });
 
 // on insere le middleware au milieu de la requete pour verifier l'authentification de l'utilisateur
-router.get("/api/users/me", authentification, async (req, res, next) => {
+router.get("/users/me", authentification, async (req, res, next) => {
   res.send(req.user);
 });
 
@@ -96,7 +92,7 @@ router.patch("/api/users/me", authentification, async (req, res, next) => {
 });
 
 // DELETE
-router.delete("/api/users/me", authentification, async (req, res, next) => {
+router.delete("/users/me", authentification, async (req, res, next) => {
   try {
     await req.user.remove();
     res.send(req.user);
