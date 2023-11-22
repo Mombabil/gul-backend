@@ -16,6 +16,7 @@ connectDb().catch((err) => console.log(err));
 
 // AuthorisationCORS
 app.use(
+  setHeader("Access-Allow-Control-Origin", "https://gamifyurlife.netlify.app"),
   cors({
     origin: "https://gamifyurlife.netlify.app",
     credentials: true,
