@@ -14,6 +14,8 @@ const port = process.env.PORT || 5000;
 // connexion database
 connectDb().catch((err) => console.log(err));
 
+// AuthorisationCORS
+app.use(cors());
 
 // gestion des routes
 app.use(express.json());
@@ -28,8 +30,6 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
-// AuthorisationCORS
-app.use(cors());
 
 app.listen(port, () => {
   console.log("Le serveur est lancé sur le port " + port);
