@@ -6,6 +6,7 @@ const router = new express.Router();
 // CREATE
 // creation de compte
 router.post("/users", async (req, res, next) => {
+  res.set("Access-Control-Allow-Origin", "https://gamifyurlife.netlify.app");
   const user = new User(req.body);
 
   try {
@@ -17,6 +18,7 @@ router.post("/users", async (req, res, next) => {
 });
 // connexion
 router.post("/users/login", async (req, res, next) => {
+  res.set("Access-Control-Allow-Origin", "https://gamifyurlife.netlify.app");
   try {
     const user = await User.findUser(req.body.email, req.body.password);
     const authToken = await user.generateAuthTokenAndSaveUser();
@@ -62,6 +64,7 @@ router.post("/users/logout/all", authentification, async (req, res, next) => {
 
 // on insere le middleware au milieu de la requete pour verifier l'authentification de l'utilisateur
 router.get("/users/me", authentification, async (req, res, next) => {
+  res.set("Access-Control-Allow-Origin", "https://gamifyurlife.netlify.app");
   res.send(req.user);
 });
 
@@ -78,7 +81,7 @@ router.get("/users/me", authentification, async (req, res, next) => {
 // });
 
 // UPDATE
-router.patch("/api/users/me", authentification, async (req, res, next) => {
+router.patch("/users/me", authentification, async (req, res, next) => {
   const updatedInfo = Object.keys(req.body);
 
   try {
