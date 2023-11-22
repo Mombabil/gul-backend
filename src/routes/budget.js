@@ -5,10 +5,6 @@ const router = new express.Router();
 // CREATE
 // nouveau budget
 router.post("/budgets", async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gamifyurlife.netlify.app"
-  );
   const budget = new Budget(req.body);
   await budget.save();
   res.status(200).json(budget);
@@ -17,10 +13,6 @@ router.post("/budgets", async (req, res, next) => {
 // READ
 // recuperer tout les budgets
 router.get("/budgets", async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gamifyurlife.netlify.app"
-  );
   try {
     const budgets = await Budget.find({});
     res.send(budgets);
@@ -32,10 +24,6 @@ router.get("/budgets", async (req, res, next) => {
 // UPDATE
 // modifier un budget
 router.patch("/budgets/:id", async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gamifyurlife.netlify.app"
-  );
   const updateBudget = Object.keys(req.body);
 
   try {
@@ -51,10 +39,6 @@ router.patch("/budgets/:id", async (req, res, next) => {
 // DELETE
 // supprimer un budget
 router.patch("/budgets/:id", async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gamifyurlife.netlify.app"
-  );
   const budgetId = req.params.id;
 
   try {

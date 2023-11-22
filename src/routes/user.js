@@ -6,10 +6,6 @@ const router = new express.Router();
 // CREATE
 // creation de compte
 router.post("/users", async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gamifyurlife.netlify.app"
-  );
   const user = new User(req.body);
 
   try {
@@ -21,10 +17,6 @@ router.post("/users", async (req, res, next) => {
 });
 // connexion
 router.post("/users/login", async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gamifyurlife.netlify.app"
-  );
   try {
     const user = await User.findUser(req.body.email, req.body.password);
     const authToken = await user.generateAuthTokenAndSaveUser();
@@ -35,10 +27,6 @@ router.post("/users/login", async (req, res, next) => {
 });
 // déconnexion
 router.post("/users/logout", authentification, async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gamifyurlife.netlify.app"
-  );
   try {
     // on recupere la liste de tt les tokens
     // on filtre le token en cours d'utilisation
@@ -54,10 +42,6 @@ router.post("/users/logout", authentification, async (req, res, next) => {
 });
 // supprimer ts les tokens de l'utilisateur
 router.post("/users/logout/all", authentification, async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gamifyurlife.netlify.app"
-  );
   try {
     req.user.authTokens = [];
     await req.user.save();
@@ -78,10 +62,6 @@ router.post("/users/logout/all", authentification, async (req, res, next) => {
 
 // on insere le middleware au milieu de la requete pour verifier l'authentification de l'utilisateur
 router.get("/users/me", authentification, async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gamifyurlife.netlify.app"
-  );
   res.send(req.user);
 });
 
@@ -99,10 +79,6 @@ router.get("/users/me", authentification, async (req, res, next) => {
 
 // UPDATE
 router.patch("/api/users/me", authentification, async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gamifyurlife.netlify.app"
-  );
   const updatedInfo = Object.keys(req.body);
 
   try {
@@ -117,10 +93,6 @@ router.patch("/api/users/me", authentification, async (req, res, next) => {
 
 // DELETE
 router.delete("/users/me", authentification, async (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gamifyurlife.netlify.app"
-  );
   try {
     await req.user.remove();
     res.send(req.user);
