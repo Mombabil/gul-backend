@@ -22,13 +22,19 @@ app.use((req, res, next) => {
     optionsSuccessStatus: 200,
   });
 });
-res.setHeader(
-  "Access-Control-Allow-Origin",
-  "https://gamifyurlife.netlify.app/"
-);
-res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-next();
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://gamifyurlife.netlify.app/"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, Content-Type"
+  );
+  next();
+});
 
 // gestion des routes
 app.use(express.json());
