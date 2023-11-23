@@ -31,7 +31,8 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-Requested-With, Content-Type"
+    "Origin, X-Requested-With, Content-Type",
+    "Accept"
   );
   next();
 });
