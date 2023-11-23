@@ -21,9 +21,6 @@ app.use((req, res, next) => {
     credentials: true,
     optionsSuccessStatus: 200,
   });
-});
-
-app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
     "https://gamifyurlife.netlify.app/"
@@ -39,9 +36,11 @@ app.use((req, res, next) => {
 
 // gestion des routes
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(userRoutes);
 app.use(budgetRoutes);
 
+app.use((req, res) => res.json({ message: "l'API est en ligne !" }));
 app.listen(port, () => {
   console.log("Le serveur est lancé sur le port " + port);
 });
