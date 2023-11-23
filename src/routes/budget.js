@@ -17,7 +17,7 @@ router.get("/budgets", async (req, res, next) => {
     const budgets = await Budget.find({});
     res.send(budgets);
   } catch (e) {
-    res.status(500).send("Connexion aux budgets impossible !", e);
+    res.status(500).send(e);
   }
 });
 
