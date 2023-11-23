@@ -16,19 +16,19 @@ connectDb().catch((err) => console.log(err));
 
 // AuthorisationCORS
 app.use((req, res, next) => {
-  cors({
+  cors(console.log(cors), {
     origin: "https://gamifyurlife.netlify.app/",
     credentials: true,
     optionsSuccessStatus: 200,
   });
 });
-// res.setHeader(
-//   "Access-Control-Allow-Origin",
-//   "https://gamifyurlife.netlify.app/"
-// );
-// res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-// res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-// next();
+res.setHeader(
+  "Access-Control-Allow-Origin",
+  "https://gamifyurlife.netlify.app/"
+);
+res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+next();
 
 // gestion des routes
 app.use(express.json());
