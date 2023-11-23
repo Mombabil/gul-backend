@@ -12,7 +12,7 @@ router.post("/users", async (req, res, next) => {
     const authToken = await user.generateAuthTokenAndSaveUser();
     res.status(201).send({ user, authToken });
   } catch (e) {
-    console.error("Veuillez entrez des informations valides!");
+    console.error("Veuillez entrez des informations valides!", e);
   }
 });
 // connexion
@@ -22,7 +22,7 @@ router.post("/users/login", async (req, res, next) => {
     const authToken = await user.generateAuthTokenAndSaveUser();
     res.send({ user, authToken });
   } catch (e) {
-    console.error("Ce compte n'existe pas!");
+    console.error("Ce compte n'existe pas!", e);
   }
 });
 // déconnexion
