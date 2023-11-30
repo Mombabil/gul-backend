@@ -2,17 +2,10 @@ const express = require("express");
 const User = require("../models/user");
 const authentification = require("../middlewares/authentification");
 const router = new express.Router();
-const cors = require("cors");
-
-const corsOptions = {
-  origin: "*",
-  methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-  optionsSuccessStatus: 200,
-};
 
 // CREATE
 // creation de compte
-router.post("/users", cors(corsOptions), async (req, res, next) => {
+router.post("/users", async (req, res, next) => {
   const user = new User(req.body);
 
   try {
@@ -23,7 +16,7 @@ router.post("/users", cors(corsOptions), async (req, res, next) => {
   }
 });
 // connexion
-router.post("/users/login", cors(corsOptions), async (req, res, next) => {
+router.post("/users/login", async (req, res, next) => {
   try {
     const user = await User.findUser(req.body.email, req.body.password);
     const authToken = await user.generateAuthTokenAndSaveUser();
