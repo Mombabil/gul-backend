@@ -15,12 +15,7 @@ const port = process.env.PORT || 5000;
 connectDb().catch((err) => console.log(err));
 
 // AuthorisationCORS
-app.use(
-  cors({
-    origin: "https://gamifyurlife.netlify.app/",
-    optionsSuccessStatus: 200,
-  })
-);
+// middleware sur les routes
 
 // gestion des routes
 app.use(express.json());
