@@ -16,22 +16,13 @@ connectDb().catch((err) => console.log(err));
 
 // AuthorisationCORS
 // middleware sur les routes
-// CORS middleware
-const allowCrossDomain = function(req, res, next) {
-  var allowedOrigins = ['https://gamifyurlife.netlify.app/', 'http://localhost:5000'];
-  var origin = req.headers.origin;
-
-  if(allowedOrigins.indexOf(origin) > -1){
-      res.header('Access-Control-Allow-Origin', origin);
-  }
-
-  res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST'); // added OPTIONS as an allowed method
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type,x-access-token');
-  res.header('access-control-allow-credentials', true);
-
-  return next();
-}
-app.use(allowCrossDomain);
+const corsOptions = {
+  origin: "*",
+  methods: "GET,POST",
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // gestion des routes
 app.use(express.json());
